@@ -6,7 +6,6 @@
 
 
 ## Features
-
 - Detect spelling mistakes in:
   - Comments
   - Strings
@@ -23,13 +22,7 @@ No external dependencies yet. Everything is being developed from scratch.
 
 ## Extension Settings
 
-
-This extension will support the following settings in future versions:
-
-- `spellwise.enabled`: Enable or disable the extension
-- `spellwise.languages`: Specify which languages to check
-- `spellwise.ignoreWords`: Add custom words to ignore
-- `spellwise.scanInStrings`: Toggle spellcheck in string literals
+coming soon.
 
 ## Known Issues
 
@@ -37,20 +30,7 @@ This extension will support the following settings in future versions:
 
 ## Release Notes
 
-### 0.0.1
-
-- Initial project setup
-- Basic structure, README, and license added
-
----
-## 🧭 Roadmap
-
-- [ ] Spellchecker core logic
-- [ ] Integration with VS Code API
-- [ ] Settings and customization
-- [ ] Language support
-- [ ] Testing and performance optimizations
-- [ ] Marketplace publishing
+> See the [CHANGELOG](CHANGELOG.md) for version history.
 
 ---
 

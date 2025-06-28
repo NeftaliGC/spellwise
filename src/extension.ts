@@ -1,17 +1,22 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import { getCodeIdentifier } from './services/codeIdentifier';
+import { handleEditorChange } from './services/languageSyntax';
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
 
+	console.log('Spellwise está activo automáticamente');
+
+	// Ejecutar una vez al iniciar, si hay editor activo
+	if (vscode.window.activeTextEditor) {
+		handleEditorChange(vscode.window.activeTextEditor, context);
+	}
+
+	// Escuchar cambios de editor
 	vscode.window.onDidChangeActiveTextEditor(editor => {
-		if (editor) {
-			const codeIdentifier = getCodeIdentifier();
-			vscode.window.showInformationMessage(`Active code identifier: ${codeIdentifier}`);
-		}
+		handleEditorChange(editor, context);
 	});
 
 	

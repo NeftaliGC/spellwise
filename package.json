@@ -20,7 +20,42 @@
         "command": "spellwise.helloWorld",
         "title": "Hello World"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Spellwise",
+      "properties": {
+        "spellwise.languageSyntax": {
+          "type": "object",
+          "default": {},
+          "description": "Sintaxis personalizada de comentarios y strings por lenguaje.",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "lineComment": {
+                "type": "string",
+                "description": "Símbolo de comentario de línea."
+              },
+              "blockComment": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 2,
+                "maxItems": 2,
+                "description": "Delimitadores de comentarios en bloque (inicio y fin)."
+              },
+              "stringDelimiters": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Delimitadores de strings válidos para este lenguaje."
+              }
+            }
+          }
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",

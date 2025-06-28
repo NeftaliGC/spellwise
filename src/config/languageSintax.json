@@ -1,0 +1,16 @@
+{
+    "javascript": {
+        "lineComment": "//",
+        "blockComment": ["/*", "*/"],
+        "stringDelimiters": ["\"", "'", "`"]
+    },
+    "python": {
+        "lineComment": "#",
+        "blockComment": ["\"\"\"", "\"\"\"", "'''"],
+        "stringDelimiters": ["\"", "'", "\"\"\"", "'''"]
+    },
+    "html": {
+        "blockComment": ["<!--", "-->"],
+        "stringDelimiters": ["\""]
+    }
+}

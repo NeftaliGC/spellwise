@@ -13,7 +13,7 @@ function getTextInLine(): [string, string] | null {
     return [line.text, `${position.line}:${position.character}`];
 }
 
-export function getCommentInLine(syntax: { lineComment?: string}): string | null {
+function getCommentInLine(syntax: { lineComment?: string}): [string, string] | null {
     const [lineText, position] = getTextInLine() || [];
     if (!lineText) {
         return null; // No hay texto en la línea actual
@@ -22,13 +22,13 @@ export function getCommentInLine(syntax: { lineComment?: string}): string | null
     if (syntax.lineComment && lineText.includes(syntax.lineComment)) {
         const commentStartIndex = lineText.indexOf(syntax.lineComment);
         const commentText = lineText.substring(commentStartIndex + syntax.lineComment.length).trim();
-        return commentText; // Retorna el texto del comentario
+        return [commentText, position ? position : '']; // Retorna el texto del comentario y la posición
     }
 
     return null; // No se encontró ningún comentario
 }
 
-export function getStringInLine(syntax: { stringDelimiters?: string[] }): string | null {
+function getStringInLine(syntax: { stringDelimiters?: string[] }): [string, string] | null {
     const [lineText, position] = getTextInLine() || [];
     if (!lineText) {
         return null; // No hay texto en la línea actual
@@ -38,8 +38,22 @@ export function getStringInLine(syntax: { stringDelimiters?: string[] }): string
         const delimiters = syntax.stringDelimiters;
         const regex = new RegExp(`(${delimiters.join('|')})(.*?)(\\1)`, 'g');
         const match = regex.exec(lineText);
-        return match ? match[2] : null; // Retorna el texto entre los delimitadores
+        
+        if (match) {
+            const stringText = match[2].trim();
+            return [stringText, position ? position : '']; // Retorna el texto de la cadena y la posición
+        }
     }
 
     return null; // No hay delimitadores de cadena definidos
+}
+
+export function getTextInLineWithPosition(syntax: { stringDelimiters?: string[], lineComment?: string }): [string, string] | null {
+
+    const comment = getCommentInLine(syntax);
+    const string = getStringInLine(syntax);
+
+    //Si hay un comentario y una cadena, prioriza la cadena
+    return string || comment || null;
+
 }

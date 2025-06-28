@@ -19,6 +19,13 @@ export function activate(context: vscode.ExtensionContext) {
 		handleEditorChange(editor, context);
 	});
 
+	// Escuchar cambios en el documento
+	vscode.window.onDidChangeTextEditorSelection(event => {
+		handleEditorChange(event.textEditor, context);
+	});
+
+	
+
 	
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with registerCommand

@@ -10,7 +10,6 @@
         "stringDelimiters": ["\"", "'", "\"\"\"", "'''"]
     },
     "html": {
-        "blockComment": ["<!--", "-->"],
-        "stringDelimiters": ["\""]
+        "blockComment": ["<!--", "-->"]
     }
 }

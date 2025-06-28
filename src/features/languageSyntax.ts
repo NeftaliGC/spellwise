@@ -5,7 +5,6 @@ import { getCodeIdentifier } from './codeIdentifier';
 import { updateStatusBar } from '../core/statusBarItem';
 import { getSelectedText, isTextSelected } from './textSelection'; 
 import { getTextInLineWithPosition } from './textInLine';
-import { get } from 'http';
 
 interface languageSyntax {
 	lineComment?: string;

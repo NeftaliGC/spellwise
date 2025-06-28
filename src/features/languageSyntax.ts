@@ -4,7 +4,7 @@ import * as fs from 'fs';
 import { getCodeIdentifier } from './codeIdentifier';
 import { updateStatusBar } from '../core/statusBarItem';
 import { getSelectedText, isTextSelected } from './textSelection'; 
-import { getCommentInLine } from './textInLine';
+import { getCommentInLine, getStringInLine } from './textInLine';
 
 interface languageSyntax {
 	lineComment?: string;
@@ -49,11 +49,16 @@ export function handleEditorChange(editor: vscode.TextEditor | undefined, contex
 			console.log(`Texto seleccionado: ${selectedText}`);
 		} else {
 			const lineText = getCommentInLine(syntax);
+			const stringText = getStringInLine(syntax);
+
+			if (stringText) {
+				console.log(`Texto entre delimitadores de cadena: ${stringText}`);
+			}
+			
 			if (lineText) {
 				console.log(`Comentario en la línea actual: ${lineText}`);
-			} else {
-				console.log('No hay texto en la línea actual o no se encontraron comentarios.');
 			}
+
 		}
 	} else {
 		updateStatusBar(languageId, 'inactive');

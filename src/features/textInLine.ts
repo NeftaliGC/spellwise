@@ -14,11 +14,6 @@ function getTextInLine(): [string, string] | null {
 }
 
 export function getCommentInLine(syntax: { lineComment?: string}): string | null {
-    const editor = vscode.window.activeTextEditor;
-    if (!editor) {
-        return null; // No hay editor activo
-    }
-
     const [lineText, position] = getTextInLine() || [];
     if (!lineText) {
         return null; // No hay texto en la línea actual
@@ -31,4 +26,20 @@ export function getCommentInLine(syntax: { lineComment?: string}): string | null
     }
 
     return null; // No se encontró ningún comentario
+}
+
+export function getStringInLine(syntax: { stringDelimiters?: string[] }): string | null {
+    const [lineText, position] = getTextInLine() || [];
+    if (!lineText) {
+        return null; // No hay texto en la línea actual
+    }
+
+    if (syntax.stringDelimiters && syntax.stringDelimiters.length > 0) {
+        const delimiters = syntax.stringDelimiters;
+        const regex = new RegExp(`(${delimiters.join('|')})(.*?)(\\1)`, 'g');
+        const match = regex.exec(lineText);
+        return match ? match[2] : null; // Retorna el texto entre los delimitadores
+    }
+
+    return null; // No hay delimitadores de cadena definidos
 }

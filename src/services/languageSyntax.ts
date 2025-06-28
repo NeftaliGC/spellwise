@@ -15,7 +15,7 @@ type SyntaxMap = Record<string, languageSyntax>;
 let languageConfig: SyntaxMap = {};
 
 function loadSintaxConfig(context: vscode.ExtensionContext): SyntaxMap {
-	const configPath = path.join(context.extensionPath, 'src', 'config', 'languageSintax.json');
+	const configPath = path.join(context.extensionPath, 'src', 'config', 'languageSyntax.json');
 	const rawData = fs.readFileSync(configPath, 'utf8');
 	const builtInConfig: SyntaxMap = JSON.parse(rawData);
 
